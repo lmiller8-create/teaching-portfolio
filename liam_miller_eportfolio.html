@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liam Miller | Teaching Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #1a2744;
+    --navy-light: #243358;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --cream: #f9f6f0;
+    --white: #ffffff;
+    --text: #1a2744;
+    --muted: #6b7280;
+    --border: #e5e0d5;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+
+  body {
+    font-family: var(--sans);
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--navy);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 2px solid var(--gold);
+  }
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    gap: 0;
+  }
+  .nav-name {
+    font-family: var(--serif);
+    color: var(--gold);
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 1rem 1.5rem 1rem 0;
+    border-right: 1px solid rgba(255,255,255,0.15);
+    margin-right: 1rem;
+    white-space: nowrap;
+  }
+  .nav-tabs {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.65);
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    font-weight: 400;
+    padding: 1rem 1.1rem;
+    cursor: pointer;
+    white-space: nowrap;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    margin-bottom: -2px;
+  }
+  .tab-btn:hover { color: rgba(255,255,255,0.9); }
+  .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+  /* PAGES */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* SECTION WRAPPER */
+  .section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--navy);
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 40px,
+      rgba(201,168,76,0.04) 40px,
+      rgba(201,168,76,0.04) 80px
+    );
+  }
+  .hero-photo {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 3px solid var(--gold);
+    background: var(--navy-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-family: var(--serif);
+    font-size: 2.5rem;
+    color: var(--gold);
+    position: relative;
+    z-index: 1;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    color: var(--white);
+    font-size: 2.8rem;
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 0.5rem;
+  }
+  .hero-sub {
+    color: var(--gold-light);
+    font-size: 1rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 1.5rem;
+  }
+  .hero-tagline {
+    color: rgba(255,255,255,0.7);
+    font-size: 1rem;
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* CONTACT STRIP */
+  .contact-strip {
+    background: var(--gold);
+    padding: 0.9rem 2rem;
+  }
+  .contact-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .contact-item {
+    color: var(--navy);
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  /* HEADINGS */
+  .section-title {
+    font-family: var(--serif);
+    font-size: 1.9rem;
+    color: var(--navy);
+    margin-bottom: 0.4rem;
+  }
+  .section-divider {
+    width: 48px;
+    height: 2px;
+    background: var(--gold);
+    margin-bottom: 2rem;
+  }
+
+  /* BIO */
+  .bio-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  @media (max-width: 700px) { .bio-grid { grid-template-columns: 1fr; } }
+  .bio-text {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: #374151;
+  }
+  .bio-text p + p { margin-top: 1rem; }
+  .skills-block { }
+  .skills-block h3 {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: var(--navy);
+    margin-bottom: 1rem;
+  }
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .skill-tag {
+    background: var(--navy);
+    color: var(--gold-light);
+    font-size: 0.78rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 2rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+
+  /* RESUME SECTION */
+  .resume-block { margin-bottom: 2.5rem; }
+  .resume-block h3 {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .resume-item { margin-bottom: 1.2rem; }
+  .resume-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin-bottom: 0.2rem;
+  }
+  .resume-item-title {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--navy);
+  }
+  .resume-item-date {
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+  .resume-item-org {
+    font-size: 0.88rem;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+  }
+  .resume-item ul {
+    padding-left: 1.1rem;
+    font-size: 0.88rem;
+    color: #4b5563;
+    line-height: 1.7;
+  }
+  .resume-item li { margin-bottom: 0.2rem; }
+
+  /* CARDS */
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .card h3 {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    color: var(--navy);
+    margin-bottom: 0.75rem;
+  }
+  .card p, .card li {
+    font-size: 0.93rem;
+    line-height: 1.8;
+    color: #374151;
+  }
+  .card ul { padding-left: 1.1rem; }
+  .card li { margin-bottom: 0.3rem; }
+  .card-label {
+    display: inline-block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  /* METAPHOR */
+  .metaphor-hero {
+    background: var(--navy);
+    border-radius: 8px;
+    padding: 3rem 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  .metaphor-hero .big-quote {
+    font-family: var(--serif);
+    font-size: 2rem;
+    color: var(--gold);
+    line-height: 1.4;
+    margin-bottom: 1rem;
+  }
+  .metaphor-hero p {
+    color: rgba(255,255,255,0.75);
+    font-size: 0.95rem;
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+
+  /* OBSERVATIONS */
+  .obs-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .obs-badge {
+    background: var(--navy);
+    color: var(--gold);
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.35rem 0.85rem;
+    border-radius: 2rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .obs-title {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    color: var(--navy);
+  }
+  .qa-block { margin-bottom: 1.4rem; }
+  .qa-q {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+  }
+  .qa-a {
+    font-size: 0.93rem;
+    line-height: 1.8;
+    color: #374151;
+  }
+
+  /* RESOURCES */
+  .resource-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+  }
+  .resource-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem 1.4rem;
+    border-top: 3px solid var(--gold);
+  }
+  .resource-card h4 {
+    font-weight: 500;
+    font-size: 0.93rem;
+    color: var(--navy);
+    margin-bottom: 0.4rem;
+  }
+  .resource-card p {
+    font-size: 0.83rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .resource-category {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  /* RUBRICS */
+  .rubric-block {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+  .rubric-header {
+    background: var(--navy);
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .rubric-header h3 {
+    font-family: var(--serif);
+    color: var(--white);
+    font-size: 1.1rem;
+  }
+  .rubric-header span {
+    font-size: 0.75rem;
+    color: var(--gold-light);
+    margin-left: auto;
+  }
+  .rubric-body { padding: 1.5rem; }
+  .rubric-body p {
+    font-size: 0.9rem;
+    color: #374151;
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+  .rubric-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0.75rem;
+  }
+  .rubric-item {
+    background: var(--cream);
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+    color: var(--navy);
+    font-weight: 400;
+    line-height: 1.5;
+  }
+  .rubric-item strong {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+    color: var(--navy);
+  }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    margin-top: 2rem;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-name">Liam Miller</div>
+    <div class="nav-tabs">
+      <button class="tab-btn active" onclick="showPage('home', this)">Home</button>
+      <button class="tab-btn" onclick="showPage('philosophy', this)">Philosophy</button>
+      <button class="tab-btn" onclick="showPage('observations', this)">Observations</button>
+      <button class="tab-btn" onclick="showPage('resources', this)">Resources</button>
+      <button class="tab-btn" onclick="showPage('rubrics', this)">Rubrics</button>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE 1: HOME -->
+<div id="home" class="page active">
+  <div class="hero">
+    <div class="hero-photo">LM</div>
+    <h1>Liam Miller</h1>
+    <div class="hero-sub">Future Educator &nbsp;·&nbsp; Communication Studies &nbsp;·&nbsp; Special Education</div>
+    <p class="hero-tagline">Building classrooms where every student feels seen, supported, and challenged to grow.</p>
+  </div>
+
+  <div class="contact-strip">
+    <div class="contact-inner">
+      <span class="contact-item">📍 Tacoma, WA</span>
+      <span class="contact-item">📞 (253) 625-6267</span>
+      <span class="contact-item">✉️ lmiller8@csuchico.edu</span>
+      <span class="contact-item">🎓 CSU Chico, B.A. Communication Studies</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">About Me</h2>
+    <div class="section-divider"></div>
+    <div class="bio-grid">
+      <div class="bio-text">
+        <p>I'm Liam, a graduating senior at California State University, Chico studying Communication Studies with a minor in Special Education. I grew up in Tacoma, Washington and came to Chico with a drive to work with young people in meaningful ways and this program has only deepened that.</p>
+        <p>My path to teaching hasn't been a straight line. I've worked as a lifeguard, a dental assistant, a caregiver for individuals with disabilities, and for the past two years I've served as captain of the CSU Chico men's soccer team. Every one of those experiences taught me something about patience, communication, and showing up for the people depending on you, which is exactly what good teaching asks of you every single day.</p>
+        <p>I'm especially interested in how communication and language shape learning. My minor in Special Education has pushed me to think about how classrooms can be designed so that every student, regardless of ability, language background, or learning style, gets a real shot at success.</p>
+        <p>This portfolio is a snapshot of where I am right now. It's a work in progress, just like I am.</p>
+      </div>
+      <div class="skills-block">
+        <h3>Core Competencies</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Adaptive Communication</span>
+          <span class="skill-tag">Leadership</span>
+          <span class="skill-tag">Crisis Response</span>
+          <span class="skill-tag">Public Speaking</span>
+          <span class="skill-tag">Conflict Resolution</span>
+          <span class="skill-tag">Team Development</span>
+          <span class="skill-tag">CPR / AED Certified</span>
+          <span class="skill-tag">Documentation</span>
+          <span class="skill-tag">Accountability</span>
+          <span class="skill-tag">Risk Assessment</span>
+        </div>
+        <h3 style="margin-top: 1.5rem;">Education</h3>
+        <div class="resume-item" style="margin-top: 0.75rem;">
+          <div class="resume-item-header">
+            <span class="resume-item-title">B.A. Communication Studies</span>
+            <span class="resume-item-date">May 2026</span>
+          </div>
+          <div class="resume-item-org">CSU Chico &nbsp;·&nbsp; Minor: Special Education &nbsp;·&nbsp; GPA 3.2</div>
+        </div>
+        <div class="resume-item">
+          <div class="resume-item-header">
+            <span class="resume-item-title">Bellarmine Preparatory School</span>
+            <span class="resume-item-date">2022</span>
+          </div>
+          <div class="resume-item-org">Tacoma, WA &nbsp;·&nbsp; GPA 3.5</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESUME -->
+    <div style="margin-top: 3.5rem;">
+      <h2 class="section-title">Résumé</h2>
+      <div class="section-divider"></div>
+      <div class="resume-block">
+        <h3>Professional Experience</h3>
+        <div class="resume-item">
+          <div class="resume-item-header">
+            <span class="resume-item-title">Caregiver Intern</span>
+            <span class="resume-item-date">2025–Present</span>
+          </div>
+          <div class="resume-item-org">Disability Support Services</div>
+          <ul>
+            <li>Provide full-spectrum personal care including hygiene support, mobility aid, and daily living assistance.</li>
+            <li>Implement adaptive communication strategies and individualized care routines.</li>
+            <li>Maintain dignity-centered care, detailed documentation, and consistent professional accountability.</li>
+          </ul>
+        </div>
+        <div class="resume-item">
+          <div class="resume-item-header">
+            <span class="resume-item-title">Lifeguard</span>
+            <span class="resume-item-date">2023–2026</span>
+          </div>
+          <div class="resume-item-org">Tacoma Lawn Tennis Club, Tacoma, WA</div>
+          <ul>
+            <li>Supervised safety of 100+ members daily; CPR/AED and First Aid certified.</li>
+            <li>Executed emergency response protocols and demonstrated calm decision-making under pressure.</li>
+          </ul>
+        </div>
+        <div class="resume-item">
+          <div class="resume-item-header">
+            <span class="resume-item-title">Stocker</span>
+            <span class="resume-item-date">2022–2023</span>
+          </div>
+          <div class="resume-item-org">Inderbitzin Company, Tacoma, WA</div>
+          <ul>
+            <li>Managed inventory systems and shipment logistics in a high-output warehouse environment.</li>
+          </ul>
+        </div>
+        <div class="resume-item">
+          <div class="resume-item-header">
+            <span class="resume-item-title">Dental Assistant</span>
+            <span class="resume-item-date">2020–2021</span>
+          </div>
+          <div class="resume-item-org">Commencement Bay Dentistry, Tacoma, WA</div>
+          <ul>
+            <li>Assisted clinical procedures, maintained HIPAA standards, and coordinated patient care.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="resume-block">
+        <h3>Athletic Leadership</h3>
+        <div class="resume-item">
+          <div class="resume-item-header">
+            <span class="resume-item-title">Team Captain, Men's Soccer</span>
+            <span class="resume-item-date">2023–Present</span>
+          </div>
+          <div class="resume-item-org">California State University, Chico</div>
+          <ul>
+            <li>Two-year elected captain; directed team culture, communication, and competitive execution.</li>
+            <li>Washington State Champion (2022); Player of the Year (2022).</li>
+            <li>Selected to participate in ECNL National Selection Game (2022).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 2: PHILOSOPHY -->
+<div id="philosophy" class="page">
+  <div class="section">
+    <h2 class="section-title">Teaching Metaphor</h2>
+    <div class="section-divider"></div>
+
+    <div class="metaphor-hero">
+      <div class="big-quote">"Teaching is like being a coach on game day, every single day."</div>
+      <p>A coach doesn't play the game for the athletes. They prepare them, challenge them, believe in them when they don't quite believe in themselves yet, and then step back and let them show what they've got. That's what I want to do in a classroom.</p>
+    </div>
+
+    <div class="card">
+      <span class="card-label">The Metaphor Explained</span>
+      <p>I've been a soccer player my whole life, and a team captain for the past two years. What I've learned from that is that the best coaches I've had weren't the loudest or the most demanding. They were the ones who figured out what each individual needed and gave it to them. One player needs to be pushed hard. Another needs someone to quietly build their confidence. A third just needs you to get out of their way and trust them.</p>
+      <p style="margin-top: 0.85rem;">That's exactly how I think about teaching. Every kid in a classroom is different. They come in with different skills, different fears, different reasons for being there. A teacher who treats everyone the same isn't being fair. They're being lazy. Real fairness means figuring out what each student actually needs to succeed and giving them that.</p>
+      <p style="margin-top: 0.85rem;">And just like a coach, a teacher has to be honest. You can't just tell kids they're doing great when they're not. Real growth comes from honest feedback, given with care. That's a balance I'm still learning, but it's one I take seriously.</p>
+    </div>
+
+    <div style="margin-top: 3rem;">
+      <h2 class="section-title">Teaching Philosophy</h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="card">
+      <span class="card-label">What I Believe About Learning</span>
+      <p>I believe a classroom should be a place where students feel comfortable and actually want to be there. Learning isn't just about getting good grades. It's about building confidence and figuring out how to think for yourself. I don't just want to stand at the front and talk. I want to create an environment where students feel supported and aren't afraid to speak up or make mistakes.</p>
+      <p style="margin-top: 0.85rem;">I think students learn best when they're actually interested in what they're doing. If everything is just notes and lectures, people are going to check out. So I'd keep things more interactive with group work, discussions, and hands on activities. When students can connect what they're learning to real life it sticks better and they care more about it.</p>
+    </div>
+
+    <div class="card">
+      <span class="card-label">Planning and Assessment</span>
+      <p>When it comes to planning, I'd use standards so I know what I'm aiming for, but I'm not going to teach everything the exact same way to every student. Everyone learns differently and at different speeds, so I'd switch things up depending on what the class needs. Some students need more help, some are ready to move ahead, and that's normal.</p>
+      <p style="margin-top: 0.85rem;">For assessment I don't think it should just be tests all the time. I'd use smaller check ins, classwork, and projects to see how students are doing along the way. That way I can catch problems early instead of waiting until the end when it's too late. I care more about students improving than just getting a score.</p>
+      <p style="margin-top: 0.85rem;">Technology is something I'd use but not overdo. Videos or online tools can make things more interesting and help students who struggle with traditional ways of learning. But it shouldn't be a distraction or replace actually teaching.</p>
+    </div>
+
+    <div class="card">
+      <span class="card-label">Inclusion and Every Student</span>
+      <p>Making sure every student feels included is something I take seriously. Not everyone comes from the same background and not everyone learns the same way. That's why things like accommodations and IEPs matter. If a student needs extra time, different assignments, or support in class then that should be provided, no question. It's not about making things easier. It's about giving students a fair chance to succeed.</p>
+      <p style="margin-top: 0.85rem;">I also think teachers need to work with others and not try to do everything alone. Things like IEP teams, RTI, and working with parents are all part of helping students succeed. If a student is struggling it's important to track progress, communicate with others, and actually do something about it instead of ignoring it.</p>
+    </div>
+
+    <div class="card">
+      <span class="card-label">Where I'm at Right Now</span>
+      <p>At the end of the day I just want to be the kind of teacher that students respect and feel comfortable around. Someone who actually cares and pays attention to what students need. I know I'm still learning and my philosophy will probably change over time, but right now my goal is simple: create a classroom where students feel supported, included, and motivated to improve.</p>
+      <p style="margin-top: 0.85rem; font-size: 0.82rem; color: var(--muted);">References: Koch, J. (2023). Teach: Introduction to Education (5th ed.). SAGE Publishing. &nbsp;|&nbsp; Bateman, D.F., Cline, J.L. (2016). A Teacher's Guide to Special Education. ASCD.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 3: OBSERVATIONS -->
+<div id="observations" class="page">
+  <div class="section">
+    <h2 class="section-title">Classroom Observations</h2>
+    <div class="section-divider"></div>
+    <p style="color: var(--muted); font-size: 0.93rem; margin-bottom: 2.5rem; line-height: 1.7;">These are reflections from my Atlas classroom observations completed in my teacher preparation coursework. Each one asked me to connect what I was watching to the concepts we were reading about in class.</p>
+
+    <!-- OBSERVATION 1 -->
+    <div class="card" style="border-top: 3px solid var(--gold);">
+      <div class="obs-header">
+        <span class="obs-badge">Observation #1</span>
+        <h3 class="obs-title" style="font-size: 1.15rem; margin-bottom: 0;">Chapter 1: Becoming a Teacher: Looking Forward and Backward at the Same Time</h3>
+      </div>
+
+      <div class="qa-block">
+        <div class="qa-q">Video Selected</div>
+        <div class="qa-a">Experimenting with Force and Motion through Roller Coaster Designs, a fifth-grade lesson where students built and tested roller coasters as a way to explore physics and math together.</div>
+      </div>
+
+      <div class="qa-block">
+        <div class="qa-q">How Was the Classroom Set Up?</div>
+        <div class="qa-a">The desks were arranged in small groups, not rows. Each group had assigned roles like timer, recorder, and manager so everyone had a job. It felt less like a classroom and more like a workspace. That kind of setup matched what our chapter talks about when it describes student-centered learning: when kids have real roles and real responsibilities, they actually stay engaged.</div>
+      </div>
+
+      <div class="qa-block">
+        <div class="qa-q">What Was the Teacher Doing?</div>
+        <div class="qa-a">She wasn't at the front of the room lecturing. She was moving between groups asking things like "Why didn't that trial work?" or "What would you change?" She let students struggle and figure stuff out before stepping in. That's exactly what the chapter means when it talks about guiding learning through questions instead of just handing out answers. She trusted the process, which is harder than it sounds.</div>
+      </div>
+
+      <div class="qa-block">
+        <div class="qa-q">What Were the Students Doing?</div>
+        <div class="qa-a">They were actually problem-solving, not pretending to. When a roller coaster design flopped, they'd talk through what went wrong (friction, not enough momentum, whatever it was) and then try again. They were also doing real math, collecting data and calculating speed. The chapter talks a lot about active engagement being the key to real learning, and this was a good example of what that actually looks like versus what it sounds like on paper.</div>
+      </div>
+
+      <div class="qa-block">
+        <div class="qa-q">The Five Qualities of a Good Teacher (Chapter 1, pg. 10)</div>
+        <div class="qa-a">
+          <strong>Commitment to student learning:</strong> The teacher built the unit starting with simpler activities and working up to the full roller coaster design. That was clearly intentional scaffolding.<br><br>
+          <strong>Caring toward students:</strong> When groups hit a wall, she didn't criticize them. She encouraged them to keep going and pointed out when they were working well together. She said something like "I can see you're using good teamwork" and that kind of small comment matters more than people think.<br><br>
+          <strong>Conscious about what's going on:</strong> She noticed which students were quieter or still learning English and made a point to ask them questions directly. She wasn't just paying attention to the kids who were loudest. She was watching everyone.<br><br>
+          <strong>Centered and calm:</strong> Nothing seemed to rattle her. When activities failed multiple times, she stayed steady. That kept the students from getting frustrated and giving up, which honestly might be the hardest thing to do consistently as a teacher.<br><br>
+          <strong>Courageous about sticking with the plan:</strong> She didn't jump in to save struggling groups. She let them sit in the discomfort of not knowing and figure it out, which takes real confidence in the process.
+        </div>
+      </div>
+
+      <div class="qa-block">
+        <div class="qa-q">Classroom Culture and Climate</div>
+        <div class="qa-a">The whole room had this vibe where it was okay to fail and try again. Kids were admitting things weren't working and nobody made it weird. They just kept going. That's not something that happens by accident. The chapter talks about how a positive classroom climate builds student confidence, and you could see that playing out. These kids weren't afraid to be wrong, which is honestly rare.</div>
+      </div>
+
+      <div class="qa-block">
+        <div class="qa-q">A Question This Raised for Me</div>
+        <div class="qa-a">How do you make sure every student stays engaged during group work without micromanaging them? There's a real tension between letting kids struggle productively and noticing when someone has checked out completely.</div>
+      </div>
+
+      <div class="qa-block">
+        <div class="qa-q">What I Took Away from This Observation</div>
+        <div class="qa-a">Letting students struggle productively actually leads to better learning and a stronger classroom culture. That sounds obvious, but watching it happen made it real. The teacher could have jumped in to fix things a dozen times and she didn't, and the students were better for it.</div>
+      </div>
+    </div>
+
+    <!-- OBSERVATION 2 -->
+    <div class="card" style="border-top: 3px solid var(--gold);">
+      <div class="obs-header">
+        <span class="obs-badge">Observation #2</span>
+        <h3 class="obs-title" style="font-size: 1.15rem; margin-bottom: 0;">Chapter 2: Teaching Stories: Individual Paths into Education</h3>
+      </div>
+
+      <div class="qa-block">
+        <div class="qa-q">Video Selected</div>
+        <div class="qa-a">Using Images to Build Speaking, Listening, and Descriptive Language Skills</div>
+      </div>
+
+      <div class="qa-block">
+        <div class="qa-q">A Challenging Moment in the Lesson</div>
+        <div class="qa-a">One of the hardest things the teacher had to manage was getting students to use real academic vocabulary instead of just defaulting to basic descriptions like color or size rather than specific scientific terminology. A lot of students naturally described whales that way, which made sense, but the lesson was asking for more than that. The teacher had to intentionally build background knowledge and model the correct language structures before students could get there. On top of that, managing a room with different language levels while keeping everyone engaged made the challenge even bigger.</div>
+      </div>
+
+      <div class="qa-block">
+        <div class="qa-q">An Exciting or Rewarding Moment</div>
+        <div class="qa-a">The gallery walk stood out to me as the most energizing part of the lesson. Students were actually moving around the room, looking at whale images, and recording their observations with partners. The digital voice recorders added something and they made the activity feel real and engaging rather than just another worksheet. What seemed most rewarding was watching students restate their partner's ideas clearly, and even catch and self-correct their own grammar while they were talking. You could see the confidence building in real time.</div>
+      </div>
+
+      <div class="qa-block">
+        <div class="qa-q">Hidden Curriculum (Chapter Reading Connection, pg. 32)</div>
+        <div class="qa-a">Yes, and it was actually one of the most interesting things to notice once I was looking for it. The students weren't just learning about whales. They were learning how to listen without interrupting, how to support a partner who communicates differently than them, how to speak in front of other people without falling apart. Those skills weren't listed anywhere as learning objectives, but they were being taught and reinforced the whole time. That's the hidden curriculum, the social and emotional lessons that run underneath the academic ones.</div>
+      </div>
+
+      <div class="qa-block">
+        <div class="qa-q">A Question This Raised for Me</div>
+        <div class="qa-a">How can a teacher keep challenging advanced students while also giving enough structure and support to English learners who need more scaffolding? I kept watching the teacher try to do both at once and wondering how you actually manage that without one group getting left behind.</div>
+      </div>
+
+      <div class="qa-block">
+        <div class="qa-q">What I Took Away from This Observation</div>
+        <div class="qa-a">Building background knowledge and modeling language expectations before asking students to produce language makes a real difference. When students know what's expected of them, have the vocabulary they need, and have had a chance to practice in a low-stakes way, they show up to the harder task with actual confidence. That seems obvious when you say it out loud, but watching it play out in a real classroom made it click in a way that just reading about it didn't.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 4: RESOURCES -->
+<div id="resources" class="page">
+  <div class="section">
+    <h2 class="section-title">Educational Resources</h2>
+    <div class="section-divider"></div>
+    <p style="color: var(--muted); font-size: 0.93rem; margin-bottom: 1rem; line-height: 1.7;">These are the tools, websites, and resources I've collected through my coursework that I plan to actually use as a teacher, not just a list of links but things I've genuinely found useful or expect to come back to.</p>
+
+    <div class="resource-category">Curriculum and Lesson Planning</div>
+    <div class="resource-grid">
+      <div class="resource-card">
+        <h4>Teaching Tolerance / Learning for Justice</h4>
+        <p>Classroom resources focused on social justice, equity, and inclusive teaching. Especially useful for building culturally responsive units.</p>
+      </div>
+      <div class="resource-card">
+        <h4>ReadWriteThink</h4>
+        <p>Lesson plans, interactive tools, and student materials from NCTE. Heavy on literacy development and useful across subjects.</p>
+      </div>
+      <div class="resource-card">
+        <h4>Khan Academy</h4>
+        <p>Free instructional videos and practice tools. Good for differentiation. Students can work at their own pace and revisit concepts independently.</p>
+      </div>
+      <div class="resource-card">
+        <h4>Edutopia</h4>
+        <p>Research-backed strategies on everything from project-based learning to social-emotional learning. More practical than theoretical.</p>
+      </div>
+    </div>
+
+    <div class="resource-category">Special Education and Inclusive Practices</div>
+    <div class="resource-grid">
+      <div class="resource-card">
+        <h4>CAST: Universal Design for Learning</h4>
+        <p>The UDL framework has been the most useful thing I've learned in my Special Ed minor. This site has practical tools for implementing it in real classrooms.</p>
+      </div>
+      <div class="resource-card">
+        <h4>Understood.org</h4>
+        <p>Resources for students with learning and thinking differences. Helpful for understanding IEPs, 504 plans, and how to support students with different needs.</p>
+      </div>
+      <div class="resource-card">
+        <h4>Council for Exceptional Children (CEC)</h4>
+        <p>Professional organization for special educators. Has standards, journals, and resources I plan to keep coming back to throughout my career.</p>
+      </div>
+      <div class="resource-card">
+        <h4>National Center on Accessible Educational Materials</h4>
+        <p>Guidance on how to make materials accessible, including audiobooks, tactile graphics, and more.</p>
+      </div>
+    </div>
+
+    <div class="resource-category">Communication and Language Development</div>
+    <div class="resource-grid">
+      <div class="resource-card">
+        <h4>WIDA (World-Class Instructional Design and Assessment)</h4>
+        <p>Standards and tools for supporting English language learners. Directly relevant to what I observed in my Chapter 2 classroom video.</p>
+      </div>
+      <div class="resource-card">
+        <h4>Colorín Colorado</h4>
+        <p>Research and strategies specifically for ELL students and their families. Good for building home-school connections.</p>
+      </div>
+      <div class="resource-card">
+        <h4>The Iris Center</h4>
+        <p>Free online training modules on special education topics, very accessible and practical, and I used several of these in my minor coursework.</p>
+      </div>
+    </div>
+
+    <div class="resource-category">Technology in the Classroom</div>
+    <div class="resource-grid">
+      <div class="resource-card">
+        <h4>Google for Education</h4>
+        <p>Google Classroom, Docs, and Slides, tools I already know and plan to use for organization, collaboration, and feedback.</p>
+      </div>
+      <div class="resource-card">
+        <h4>Padlet</h4>
+        <p>Collaborative digital boards. Great for gallery walks, brainstorms, or low-stakes sharing. Easy for students to use without a lot of setup.</p>
+      </div>
+      <div class="resource-card">
+        <h4>Nearpod</h4>
+        <p>Interactive lessons with built-in formative assessment. Allows for real-time student responses which helps with checking for understanding.</p>
+      </div>
+      <div class="resource-card">
+        <h4>Common Sense Education</h4>
+        <p>Digital literacy curriculum and reviews of educational technology tools. Helpful for teaching responsible tech use.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 5: RUBRICS -->
+<div id="rubrics" class="page">
+  <div class="section">
+    <h2 class="section-title">Rubrics and Standards</h2>
+    <div class="section-divider"></div>
+    <p style="color: var(--muted); font-size: 0.93rem; margin-bottom: 2.5rem; line-height: 1.7;">These are the frameworks and standards that guide my development as a pre-service teacher through my credential program at CSU Chico.</p>
+
+    <!-- CORE -->
+    <div class="rubric-block">
+      <div class="rubric-header">
+        <h3>CORE Academic Skills Assessment</h3>
+        <span>California Basic Skills Requirement</span>
+      </div>
+      <div class="rubric-body">
+        <p>The California Subject Examinations for Teachers (CSET) and the CORE Multiple Subjects exam are required assessments for teacher candidates in California. They assess foundational academic skills in reading, writing, and mathematics that teachers need to support student learning across content areas.</p>
+        <p>The CORE exam is designed to ensure that teacher candidates have the academic knowledge and skills needed to help all students, including English learners and students with special needs, to develop foundational literacy and numeracy skills.</p>
+        <div class="rubric-items">
+          <div class="rubric-item"><strong>Reading</strong>Foundational literacy, comprehension, and analysis skills</div>
+          <div class="rubric-item"><strong>Writing</strong>Composition, mechanics, and written communication</div>
+          <div class="rubric-item"><strong>Mathematics</strong>Number concepts, algebra, and mathematical reasoning</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TPE -->
+    <div class="rubric-block">
+      <div class="rubric-header">
+        <h3>Teacher Performance Expectations (TPEs)</h3>
+        <span>California Commission on Teacher Credentialing</span>
+      </div>
+      <div class="rubric-body">
+        <p>The California TPEs define what beginning teachers are expected to know and be able to do. They're organized into six domains and are the foundation of how student teachers are evaluated during fieldwork and clinical practice. My work in this portfolio connects to several of these domains directly.</p>
+        <div class="rubric-items">
+          <div class="rubric-item"><strong>TPE 1</strong>Engaging and supporting all students in learning</div>
+          <div class="rubric-item"><strong>TPE 2</strong>Creating and maintaining effective environments for student learning</div>
+          <div class="rubric-item"><strong>TPE 3</strong>Understanding and organizing subject matter for student learning</div>
+          <div class="rubric-item"><strong>TPE 4</strong>Planning instruction and designing learning experiences</div>
+          <div class="rubric-item"><strong>TPE 5</strong>Assessing student learning</div>
+          <div class="rubric-item"><strong>TPE 6</strong>Developing as a professional educator</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DISPOSITION -->
+    <div class="rubric-block">
+      <div class="rubric-header">
+        <h3>Disposition Rubric</h3>
+        <span>CSU Chico School of Education</span>
+      </div>
+      <div class="rubric-body">
+        <p>The Disposition Rubric evaluates the professional attitudes, values, and behaviors that teacher candidates demonstrate throughout their preparation program. Dispositions aren't just about what you know. They're about who you are in a classroom and how you show up for students, families, and colleagues.</p>
+        <p>The areas assessed include professionalism, commitment to equity, collaboration, reflective practice, and communication. I take these seriously not just as things to be graded on, but as the actual qualities that define what it means to be a good teacher.</p>
+        <div class="rubric-items">
+          <div class="rubric-item"><strong>Professionalism</strong>Reliability, punctuality, and ethical conduct</div>
+          <div class="rubric-item"><strong>Equity</strong>Commitment to all learners regardless of background or ability</div>
+          <div class="rubric-item"><strong>Collaboration</strong>Working effectively with peers, faculty, and mentor teachers</div>
+          <div class="rubric-item"><strong>Reflection</strong>Willingness to examine and improve one's own practice</div>
+          <div class="rubric-item"><strong>Communication</strong>Clear, respectful, and professional communication in all contexts</div>
+          <div class="rubric-item"><strong>Growth Mindset</strong>Openness to feedback and continuous improvement</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  Liam Miller &nbsp;·&nbsp; Teaching ePortfolio &nbsp;·&nbsp; CSU Chico, 2026
+</footer>
+
+<script>
+function showPage(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0, 0);
+}
+</script>
+</body>
+</html>
